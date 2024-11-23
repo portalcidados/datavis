@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkviz_insper_cidades=self.webpackChunkviz_insper_cidades||[]).push([[641],{641:(e,n,i)=>{i.r(n),i.d(n,{default:()=>a}),i(540);var s=i(976),d=i(848);function a(){return(0,d.jsx)("div",{children:(0,d.jsx)("lu",{children:(0,d.jsx)("li",{children:(0,d.jsx)(s.N_,{to:"/adensamento",children:"Adensamento Populacional"})})})})}}}]);
