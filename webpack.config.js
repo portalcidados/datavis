@@ -14,12 +14,13 @@ module.exports = {
         use: ["style-loader", "css-loader", "postcss-loader"],
       },
       {
-        test: /\.(pdf|jpg|png|gif|ico|webp)$/,
-        use: [
-          {
-            loader: "url-loader",
+        test: /\.(pdf|jpg|png|gif|ico|webp)$/i,
+        type: 'asset',
+        parser: {
+          dataUrlCondition: {
+            maxSize: 9194304, // Limite de 8KB (8 * 1024 bytes)
           },
-        ],
+        },
       },
       {
         test: /\.(woff|woff2|eot|ttf|svg|otf)$/,

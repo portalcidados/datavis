@@ -11,11 +11,11 @@ export const Capa = () => {
       },
       mobile: {
         center: {
-          lat: -23.0450,
-          lon: -46.9383, 
+          lat: -23.5505, 
+          lon: -46.6333, 
         },
-        zoom: 11,
-        duration: 4,
+        zoom: 14,
+        duration: 6,
       },
     },
     layers: ['portal_dados:municipios_sp', 'portal_dados:densidade_demografica_sp', "portal_dados:Corpos D'água"],
@@ -37,10 +37,10 @@ export const IntroMapa = () => {
       },
       mobile: {
         center: {
-          lat: -23.5450,
+          lat: -23.5650,
           lon: -46.6383, 
         },
-        zoom: 8.57,
+        zoom: 11.0,
         pitch: 0.0,
         bearing: 0.0,
         duration: 6,
@@ -65,10 +65,10 @@ export const IntroMapa_rigth = () => {
       },
       mobile: {
         center: {
-          lat: -23.5450,
-          lon: -46.8383, 
+          lat: -23.5650,
+          lon: -46.6383, 
         },
-        zoom: 8.57,
+        zoom: 10.2,
         pitch: 0.0,
         bearing: 0.0,
         duration: 4,
@@ -94,9 +94,9 @@ export const IntroMapa_rigth_zoom = () => {
       mobile: {
         center: {
           lat: -23.5450,
-          lon: -46.8383, 
+          lon: -46.6483, 
         },
-        zoom: 8.57,
+        zoom: 13,
         pitch: 0.0,
         bearing: 0.0,
         duration: 4,
@@ -121,10 +121,10 @@ export const Mapa_dois = () => {
       },
       mobile: {
         center: {
-          lat: -23.6156,
-          lon: -46.7461,
+          lat: -23.6159, 
+          lon: -46.7259,
         },
-        zoom: 8.57,
+        zoom: 15,
         pitch: 0.0,
         bearing: 0.0,
         duration: 4,
@@ -149,10 +149,10 @@ export const Mapa_dois_helio = () => {
       },
       mobile: {
         center: {
-          lat: -23.6109, 
-          lon: -46.6028,
+          lat: -23.6100, 
+          lon: -46.5926,
         },
-        zoom: 8.57,
+        zoom: 15.0,
         pitch: 0.0,
         bearing: 0.0,
         duration: 4,
@@ -177,10 +177,10 @@ export const Mapa_tres = () => {
       },
       mobile: {
         center: {
-          lat: -23.5450,
-          lon: -46.8383, 
+          lat: -23.6650,
+          lon: -46.6383, 
         },
-        zoom: 8.57,
+        zoom: 10.0,
         pitch: 0.0,
         bearing: 0.0,
         duration: 4,
@@ -205,10 +205,10 @@ export const Mapa_quatro = () => {
       },
       mobile: {
         center: {
-          lat: -23.5450,
-          lon: -46.8383, 
+          lat: -23.6650,
+          lon: -46.6383, 
         },
-        zoom: 8.57,
+        zoom: 10.0,
         pitch: 0.0,
         bearing: 0.0,
         duration: 4,
@@ -233,10 +233,10 @@ export const Mapa_quatro_zoom = () => {
       },
       mobile: {
         center: {
-          lat: -23.5450,
-          lon: -46.8383, 
+          lat: -23.6650,
+          lon: -46.6383, 
         },
-        zoom: 17.0,
+        zoom: 10.0,
         pitch: 0.0,
         bearing: 0.0,
         duration: 2,
@@ -261,10 +261,10 @@ export const Mapa_cinco = () => {
       },
       mobile: {
         center: {
-          lat: -23.5450,
-          lon: -46.8383, 
+          lat: -23.6650,
+          lon: -46.6383, 
         },
-        zoom: 8.57,
+        zoom: 10.0,
         pitch: 0.0,
         bearing: 0.0,
         duration: 4,
@@ -289,10 +289,10 @@ export const Mapa_seis = () => {
       },
       mobile: {
         center: {
-          lat: -23.5450,
-          lon: -46.8383, 
+          lat: -23.6650,
+          lon: -46.6383, 
         },
-        zoom: 8.57,
+        zoom: 10.0,
         pitch: 0.0,
         bearing: 0.0,
         duration: 4,
@@ -317,10 +317,10 @@ export const Mapa_sete = () => {
       },
       mobile: {
         center: {
-          lat: -23.5450,
-          lon: -46.8383, 
+          lat: -23.6650,
+          lon: -46.6383, 
         },
-        zoom: 8.57,
+        zoom: 10.0,
         pitch: 0.0,
         bearing: 0.0,
         duration: 4,
