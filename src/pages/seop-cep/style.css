@@ -47,11 +47,11 @@
     z-index: 1000;
     font-family: Inter, sans-serif;
     font-size: 12px;
-    border: 1px solid #ccc;
+    border: 0px solid #ccc;
     padding: 10px;
     background-color: #f9f9f9;
     max-width: 220px;
-    border-radius: 10px;
+    border-radius: 0px;
     opacity: 85%;
   }
   
@@ -85,4 +85,8 @@
   
   .intervalo {
     flex: 1;
+  }
+
+  .leaflet-popup-close-button {
+    display: none;
   }

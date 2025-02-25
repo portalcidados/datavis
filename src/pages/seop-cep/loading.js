@@ -7,11 +7,11 @@ const LoadingDiv = tw.div`
 w-full h-screen
 flex 
 flex-col
-items-center justify-center
+items-center justify-left
 text-sans
 text-[#EEDFD3]
 text-[20px]
-bg-[#61d6b2]
+bg-[#2BA680]
 `;
 
 const LoadingImage = tw.img`

@@ -8,6 +8,7 @@ import metroTremImage from './images/metro_trem.png';
 import corredorOnibusImage from './images/corredores.png';
 import pontovermelho from './images/pontovermelho.png';
 import pontocinza from './images/pontocinza.png';
+import localizar from "./images/localizar.svg";
 
 // Chapters
 import * as chapterMap from "./components/chapters.map";
@@ -172,7 +173,7 @@ function legenda_2(tipo) {
   legenda.appendChild(lista);
 }
 
-function goto(location, camadas, mapa) {
+function goto(location, camadas, mapa, points) {
   let viewState = isMobile
   ? {
     center: [location.mobile.center.lat, location.mobile.center.lon],
@@ -206,6 +207,20 @@ function goto(location, camadas, mapa) {
         tileSize: 1980,
       }).addTo(mapa);
     });
+  }
+  if (points) {
+    for (let i = 0; i < points.length; i++) {
+      let customIcon = L.icon({
+        iconUrl: localizar,
+        iconSize: [40, 40], 
+        iconAnchor: [20, 40],
+        popupAnchor: [0, -40] 
+      });
+      L.marker([points[i].point.center.lat, points[i].point.center.lon], { icon: customIcon }).addTo(mapa)
+      .bindPopup(points[i].point.name)
+      .openPopup();
+      console.log(points[i].point.name);
+    }
   }
   mapa.flyTo(viewState.center, viewState.zoom, {duration: viewState.duration});
 }
@@ -294,7 +309,7 @@ export default function SubsidioSPPO() {
         legenda_1(1);
         break;
       case "mapa_mais_um":
-        goto(chapterMap.IntroMapa_rigth_zoom().location, chapterMap.IntroMapa_rigth_zoom().layers, mapa.current)
+        goto(chapterMap.IntroMapa_rigth_zoom().location, chapterMap.IntroMapa_rigth_zoom().layers, mapa.current, chapterMap.IntroMapa_rigth_zoom().points)
         legenda_1(1);
         break;
       case "mapa_dois":
@@ -699,6 +714,7 @@ export default function SubsidioSPPO() {
       <chapterDiv.CepBlank3 id={"cep_blank3"} />
       <chapterDiv.MapaSete id={"mapa_sete"} />
       <chapterDiv.CepCapitulo7 id={"cep_capitulo7"} />
+      <chapterDiv.CepCapitulo7b id={"cep_capitulo7b"} />
       <chapterDiv.CepImages7 id={"cep_images7"} />
       <chapterDiv.CepCapitulo8 id={"cep_capitulo8"} />
       <chapterDiv.CepImages8 id={"cep_images8"} />

@@ -1,3 +1,5 @@
+import { point } from "leaflet";
+
 export const Capa = () => {
   return {
     location: {
@@ -103,6 +105,18 @@ export const IntroMapa_rigth_zoom = () => {
       },
     },
     layers: ['portal_dados:municipios_sp', 'portal_dados:densidade_demografica_sp', "portal_dados:Corpos D'água", 'portal_dados:highlight'],
+    points: [
+      {
+        point: {
+          center : {
+            lat: -23.5637411622953,
+            lon: -46.65380997775336, 
+          },
+          name: 'Av. Paulista'
+        }
+      },
+      
+    ]
   };
 };
 

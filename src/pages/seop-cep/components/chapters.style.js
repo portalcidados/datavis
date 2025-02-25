@@ -37,11 +37,12 @@ export const Scroll = tw.div`
 
 export const Title = tw.div`
   font-inter font-bold  
-  text-[25px] text-left text-[#414042]
+  text-[25px] text-left text-[#3F3F3F]
   leading-[44px]
   lg:text-[33px]
   lg:leading-[48px]
-  selection:bg-[#414042] selection:text-white
+  selection:bg-[#3F3F3F] 
+  selection:text-white
   mx-auto
   text-center
   `;
@@ -55,7 +56,8 @@ export const Subtitle = tw.div`
   lg:mb-[88px]
   mb-[98px]
   mt-[8px]
-  selection:bg-[#2BA680] selection:text-white
+  selection:bg-[#2BA680] 
+  selection:text-white
   mx-auto
   text-center
 `;
@@ -72,7 +74,7 @@ export const AuthorText = tw.div`
 export const Credito = tw.div`
   mb-7
   lg:mb-7
-  font-serif
+  font-inter
   text-sm text-left text-white
   lg:text-sm
   lg:text-left
@@ -80,7 +82,7 @@ export const Credito = tw.div`
 `;
 
 export const IntroTitle = tw.div`
-  font-bold  font-serif
+  font-bold  font-inter
   text-3xl text-left text-white
   self-start
   mb-6
@@ -88,7 +90,7 @@ export const IntroTitle = tw.div`
 `;
 
 export const IntroText = tw.div`
-  font-serif  
+  font-inter
   text-lg text-justify text-white 
   leading-normal 
   opacity-100
@@ -263,13 +265,26 @@ export const NewsTitle2 = tw.div`
   selection:bg-white selection:text-[#ef4444]
 `;
 
+export const NewsTitle3 = tw.div`
+  text-[#3ACC9F]
+  underline
+  font-inter
+  font-semibold
+  max-w-[400px]
+  text-[24px]
+  mb-[24px]
+  selection:bg-[#3ACC9F]
+  selection:text-white
+`;
+
 export const TextCard = tw.div`
   font-inter  
   text-[16px]
   text-left
   lg:leading-[150%]
   text-black
-  selection:bg-[#ef4444] selection:text-white
+  selection:bg-[#3ACC9F]
+  selection:text-white
 `;
 
 export const TextCard1 = tw.div`
@@ -280,7 +295,8 @@ export const TextCard1 = tw.div`
   text-left
   lg:leading-7
   text-white
-  selection:bg-white selection:text-[#2BA680]
+  selection:bg-white
+  selection:text-[#2BA680]
 `;
 
 const TextredSC = styled.div`
@@ -288,7 +304,7 @@ const TextredSC = styled.div`
 `;
 
 export const Textred = tw(TextredSC)`
-  text-[#2BA680]
+  text-[#000000]
   inline
   lg:px-1
   px-1
