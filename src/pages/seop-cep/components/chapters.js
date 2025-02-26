@@ -1,10 +1,10 @@
 import * as styles from "./chapters.style";
 import { isMobile } from "react-device-detect";
+import { useState } from "react";
 
 // IMAGENS
 import logoinsper from "../images/logoinsper.svg";
 import scroll from "../images/scroll.gif";
-import figura1 from "../images/Figura 7.png";
 import figura2 from "../images/Figura 13.png";
 
 // DESKTOP IMAGENS
@@ -15,11 +15,11 @@ import card11a from "../images/card11a.gif";
 import card11b from "../images/card11b.gif";
 import card12 from "../images/card12.png";
 import card13 from "../images/card13.gif";
-import card17 from "../images/card17.png";
 import card18 from "../images/card18.png";
 import card19 from "../images/card19.png";
 import card20 from "../images/card20.png";
 import card21 from "../images/card21.png";
+import card3dbg from "../images/card3dbg.png";
 
 // MOBILE IMAGENS
 import card7_mobile from "../images/card7_mobile.png";
@@ -29,11 +29,11 @@ import card11a_mobile from "../images/card11a_mobile.gif";
 import card11b_mobile from "../images/card11b_mobile.gif";
 import card12_mobile from "../images/card12_mobile.png";
 import card13_mobile from "../images/card13_mobile.gif";
-import card17_mobile from "../images/card17_mobile.png";
 import card18_mobile from "../images/card18_mobile.png";
 import card19_mobile from "../images/card19.png";
 import card20_mobile from "../images/card20_mobile.png";
 import card21_mobile from "../images/card21_mobile.png";
+import card3dbg_mobile from "../images/card3dbg_mobile.png";
 
 // TODO: REMOVE
 import { gsap } from "gsap";
@@ -525,6 +525,69 @@ export function CepImages4(
     </div>
   );
 }
+
+
+export function CepCapitulo4b(props = { id: "", chapRef: null }) {
+  // Estado para os sliders
+  const [ca, setCa] = useState(1);  // CA começa em 1
+  const [to, setTo] = useState(100); // TO começa em 50
+
+  return (
+    <styles.ChapterGenericDiv1 ref={props.chapRef} id={props.id}>
+      <styles.ContainerCard3>
+        Sua vez! Use os painéis abaixo para alterar a TO e o CA do edifício ao lado.
+        <br />
+        <br />
+        <div id="sliderContainer">
+          <label htmlFor="Nouslider">CA: </label>
+          <input
+            type="range"
+            id="Nouslider"
+            min="0"
+            max="4"
+            step="0.1"
+            value={ca}
+            onChange={(e) => setCa(e.target.value)}
+          />
+          <span id="valorSlider">{ca}</span>
+        </div>
+
+        <div id="sliderContainer2">
+          <label htmlFor="Nouslider2">TO(%): </label>
+          <input
+            type="range"
+            id="Nouslider2"
+            min="0"
+            max="100"
+            step="0.1"
+            value={to}
+            onChange={(e) => setTo(e.target.value)}
+          />
+          <span id="valorSlider2">{to}</span>
+        </div>
+      </styles.ContainerCard3>
+    </styles.ChapterGenericDiv1>
+  );
+}
+
+export function CepImages4b(
+  props = {
+    id: "",
+    chapRef: null,
+  }
+) {
+  props = setDefaultProps(props);
+  return (
+    <div ref={props.chapRef} id={props.id}>
+      <img
+        id={"cep_image_4b"}
+        src={isMobile ? card3dbg_mobile : card3dbg}
+        className="fixed object-cover top-0 left-0 w-[100%] h-full opacity-0 -z-50"
+      ></img>
+    </div>
+  );
+}
+
 
 export function CepBlank2(
   props = {

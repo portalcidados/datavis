@@ -18,7 +18,7 @@ module.exports = {
         type: 'asset',
         parser: {
           dataUrlCondition: {
-            maxSize: 9194304, // Limite de 8KB (8 * 1024 bytes)
+            maxSize: 8468000, // Limite de 8KB (8 * 1024 bytes)
           },
         },
       },

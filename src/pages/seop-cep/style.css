@@ -90,3 +90,29 @@
   .leaflet-popup-close-button {
     display: none;
   }
+
+  #sliderContainer {
+    position: relative;
+    top: 10px;
+    left: 0px;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    border-radius: 8px;
+    width: 100%;
+}
+#sliderContainer2 {
+    position: relative;
+    top: 20px;
+    left: 0px;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    border-radius: 8px;
+    width: 100%;
+}
+
+input[type="range"] {
+  width: 75%; /* Define a largura da barra */
+}
+

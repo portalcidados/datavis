@@ -3,6 +3,7 @@ import { useEffect, useState, useRef } from "react";
 import L from 'leaflet';
 import "leaflet/dist/leaflet.css";
 import './style.css';
+import * as THREE from 'three';
 import backgroundImage from './images/norte.svg';
 import metroTremImage from './images/metro_trem.png';
 import corredorOnibusImage from './images/corredores.png';
@@ -230,6 +231,121 @@ gsap.registerPlugin(ScrollTrigger);
 export default function SubsidioSPPO() {
   const mapRef = useRef(null);
   const mapa = useRef(null);
+  const container3dRef = useRef(null);
+  const animacao = useRef(null);
+  let isanimationon = useRef(null);
+
+  useEffect(() => {
+    if (container3dRef.current) {
+      const container = container3dRef.current;
+      const scene = new THREE.Scene();
+      scene.background = null;
+      //const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+      let aspect = 0;
+      if (isMobile) {
+        aspect = 1080 / 1920;
+      } else {
+        aspect = 1920 / 1080;
+      }
+      const frustumSize = 40; // Ajuste esse valor para aumentar/diminuir a visão
+      const camera = new THREE.OrthographicCamera(
+        -frustumSize * aspect, // Left
+        frustumSize * aspect, // Right
+        frustumSize,          // Top
+        -frustumSize,          // Bottom
+        0.1,                  // Near
+        1000                  // Far
+      );
+      camera.position.set(40, 40, 40); // Move a câmera para uma posição diagonal elevada
+      camera.lookAt(0, 0, 0); // Aponta a câmera para o centro da cena
+      const renderer = new THREE.WebGLRenderer({ antialias: true,  alpha: true});
+      renderer.setClearColor(0x000000, 0);
+      renderer.setSize(container.clientWidth, container.clientHeight);
+      container.appendChild(renderer.domElement);
+      //const controls = new ArcballControls( camera, renderer.domElement, scene );
+      let altura = parseFloat(document.getElementById('Nouslider').value);
+      let largura = parseFloat(document.getElementById('Nouslider2').value);
+      const testada = 9;
+      const profundidade = 20;
+      let geometry = new THREE.BoxGeometry(testada, 3, 1*profundidade);
+      const material = new THREE.MeshBasicMaterial({ color: '#61D6B2' });
+      const box = new THREE.Mesh(geometry, material);
+      if (isMobile) {
+        box.position.set(8,-12,-5);
+      } else {
+        box.position.set(42,1.5,-10.5);
+      }
+      
+
+      let geometry2 = new THREE.BoxGeometry(testada, 0.1, profundidade);
+      const material2 = new THREE.MeshBasicMaterial({ color: '#3F3F3F' });
+      const box2 = new THREE.Mesh(geometry2, material2);
+      if (isMobile == true) {
+        box2.position.set(8,-13.5,-5);
+        const axis = new THREE.Vector3(0, 1, 0);
+        box.rotateOnAxis(axis, -Math.PI / 80);
+        box2.rotateOnAxis(axis, -Math.PI / 80)
+      } else {
+        box2.position.set(42,0,-10.5);
+        const axis = new THREE.Vector3(0, 1, 0);
+        box.rotateOnAxis(axis, Math.PI / 64);
+        box2.rotateOnAxis(axis, Math.PI / 64);
+      }
+      scene.add(box);
+      scene.add(box2);
+      let edges = new THREE.EdgesGeometry(geometry);
+      const edgesMaterial = new THREE.LineBasicMaterial({ color: 0x3F3F3F }); // Cor das arestas
+      let wireframe = new THREE.LineSegments(edges, edgesMaterial);
+      box.add(wireframe);
+      function atualizarDimensoes(NovoCA, NovaTO) {
+        if (box.wireframe) {
+          box.remove(wireframe);
+          box.remove(box.wireframe);
+          box.wireframe.geometry.dispose();
+        }
+        box.geometry.dispose();
+        box.remove(geometry)
+        box.geometry = new THREE.BoxGeometry(testada, 100*NovoCA*3/NovaTO, profundidade*NovaTO/100);
+        if (isMobile) {
+          box.position.y = ((100*NovoCA*3/NovaTO) / 2);  // Mantém a base fixa no eixo Y
+          box.position.z = -1.5+((profundidade*NovaTO/100) / 2);
+          box.position.x = 21.5;
+        } else {
+          box.position.y = ((100*NovoCA*3/NovaTO) / 2);  // Mantém a base fixa no eixo Y
+          box.position.z = -20.3+((profundidade*NovaTO/100) / 2);
+        }
+        edges = new THREE.EdgesGeometry(box.geometry);  // Gerar novas arestas
+        box.wireframe = new THREE.LineSegments(edges, edgesMaterial);  // Criar novo wireframe
+        box.add(box.wireframe);  // Adicionar o wireframe atualizado
+      }
+      const sliderAltura = document.getElementById('Nouslider');
+      const sliderLargura = document.getElementById('Nouslider2');
+      const valorAltura = document.getElementById('valorSlider');
+      const valorLargura = document.getElementById('valorSlider2');
+      sliderAltura.addEventListener('input', (event) => {
+        altura = parseFloat(event.target.value);
+        valorAltura.textContent = altura + 'X';
+        atualizarDimensoes(altura, largura);
+      });
+      sliderLargura.addEventListener('input', (event) => {
+        largura = parseFloat(event.target.value);
+        valorLargura.textContent = largura + '%';
+        atualizarDimensoes(altura, largura);
+      });
+      function ajustarTamanho() {
+        const largura = container.clientWidth;
+        const altura = container.clientHeight;
+        camera.aspect = largura / altura;
+        camera.updateProjectionMatrix();
+        renderer.setSize(largura, altura);
+      }
+      window.addEventListener('resize', ajustarTamanho);
+      animacao.current = function animate() {
+        requestAnimationFrame(animate);
+        renderer.render(scene, camera);
+      }
+    }
+  }, []);
 
   useEffect(() => {
     if (mapRef.current) {
@@ -452,8 +568,8 @@ export default function SubsidioSPPO() {
 
     const tl_mapa_seis = gsap.timeline();
     tl_mapa_seis
-    .from("#cep_image_3a, #cep_image_3b, #cep_image_4", { opacity: 1, stagger: 0.2 })
-    .to("#cep_image_3a, #cep_image_3b, #cep_image_4", { opacity: 0, stagger: 0.2 });
+    .from("#cep_image_3a, #cep_image_3b, #cep_image_4, #cep_image_4b", { opacity: 1, stagger: 0.2 })
+    .to("#cep_image_3a, #cep_image_3b, #cep_image_4, #cep_image_4b", { opacity: 0, stagger: 0.2 });
     ScrollTrigger.create({
       animation: tl_mapa_seis,
       trigger: "#cep_blank2",
@@ -466,6 +582,8 @@ export default function SubsidioSPPO() {
       trigger: "#mapa_seis",
       onToggle: () => {
         setChapterNumberMap("mapa_seis");
+        cancelAnimationFrame("container3d");
+        isanimationon.current = 'off';
       },
     });
 
@@ -558,6 +676,42 @@ export default function SubsidioSPPO() {
     ScrollTrigger.create({
       animation: tl_cep_capitulo4,
       trigger: "#cep_capitulo4",
+      start: "top bottom", 
+      end: "bottom bottom", 
+      scrub: true,
+      onToggle: () => {
+        if (isanimationon == 'on') {
+          cancelAnimationFrame("container3d");
+          isanimationon.current = 'off';
+        }
+      },
+    });
+
+    const tl_cep_capitulo4b = gsap.timeline();
+    tl_cep_capitulo4b
+      .set("#cep_image_4b, #container3d", { opacity: 0 })
+      .to("#cep_image_4b, #container3d", { opacity: 1 });
+
+    ScrollTrigger.create({
+      animation: tl_cep_capitulo4b,
+      trigger: "#cep_capitulo4b",
+      start: "top bottom", 
+      end: "bottom bottom", 
+      scrub: true, 
+      onToggle: () => {
+        animacao.current();
+        isanimationon.current = 'on';
+      },
+    });
+
+    const tl_mapa_6_3d = gsap.timeline();
+    tl_mapa_6_3d
+      .set("#container3d", { })
+      .to("#container3d", { opacity: 0 });
+
+    ScrollTrigger.create({
+      animation: tl_mapa_6_3d,
+      trigger: "#mapa_seis",
       start: "top bottom", 
       end: "bottom bottom", 
       scrub: true, 
@@ -684,6 +838,7 @@ export default function SubsidioSPPO() {
   return (
     <>
     <div ref={mapRef} style={{ height: '100%', width: '100%', position: 'fixed', zIndex: '-1000' }}></div>
+    <div ref={container3dRef} id="container3d" style={{ height: '100%', width: '100%', position: 'fixed', zIndex: '0', opacity: "0" }}></div>
       <chapterDiv.Capa id={"capa"} />
       <chapterDiv.MapaCapitulo id={"mapa_capitulo"} />
       <chapterDiv.MapaZero id={"mapa_zero"} />
@@ -704,6 +859,8 @@ export default function SubsidioSPPO() {
       <chapterDiv.CepImages3 id={"cep_images3"} />
       <chapterDiv.CepCapitulo4 id={"cep_capitulo4"} />
       <chapterDiv.CepImages4 id={"cep_images4"} />
+      <chapterDiv.CepCapitulo4b id={"cep_capitulo4b"} />
+      <chapterDiv.CepImages4b id={"cep_images4b"} />
       <chapterDiv.CepBlank2 id={"cep_blank2"} />
       <chapterDiv.MapaSeis id={"mapa_seis"} />
       <chapterDiv.CepCapitulo5 id={"cep_capitulo5"} />
