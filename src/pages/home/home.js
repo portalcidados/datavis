@@ -4,11 +4,14 @@ import { Link } from "react-router-dom";
 export default function Home() {
   return (
     <div>
-      <lu>
+      <ul>
         <li>
           <Link to="/adensamento">Adensamento Populacional</Link>
         </li>
-      </lu>
+        <li>
+          <Link to="/saudesp">Saúde SP</Link>
+        </li>
+      </ul>
     </div>
   );
 }
